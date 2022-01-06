@@ -81,6 +81,10 @@ async function remove(tracks: number | number[]): Promise<void> {
   return TrackPlayer.remove(tracks)
 }
 
+async function clearQueue(): Promise<number> {
+  return TrackPlayer.clearQueue();
+  }
+
 async function removeUpcomingTracks(): Promise<void> {
   return TrackPlayer.removeUpcomingTracks()
 }
@@ -225,6 +229,7 @@ export default {
   // MARK: - Queue API
   add,
   remove,
+  clearQueue,
   removeUpcomingTracks,
   skip,
   skipToNext,

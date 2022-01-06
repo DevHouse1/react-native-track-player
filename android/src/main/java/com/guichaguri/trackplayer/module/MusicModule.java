@@ -254,6 +254,20 @@ public class MusicModule extends ReactContextBaseJavaModule implements ServiceCo
     }
 
     @ReactMethod
+    public void clearQueue(final Promise callback){
+        waitForConnection(() -> {
+            List<Track> queue = binder.getPlayback().getQueue();
+            int size = queue.size();
+            if(queue != null && !queue.isEmpty()){
+                queue.clear();
+                callback.resolve(size);
+            }else{
+                callback.resolve(0);
+            }
+        });
+    }
+
+    @ReactMethod
     public void updateMetadataForTrack(int index, ReadableMap map, final Promise callback) {
         waitForConnection(() -> {
             ExoPlayback playback = binder.getPlayback();
